@@ -64,5 +64,52 @@ public class RacingCarValidatorTest {
         String[] normalKorNames = {"포비", "nuri", "로켓보이"};
         assertThatCode(() -> RacingCarValidator.validateCarName(normalKorNames)).doesNotThrowAnyException();
     }
+    // 시도 횟수 입력 테스트
+    @Test
+    void 시도횟수_문자_입력_테스트() {
+        String charTryCount = "a";
+        String charExceptionMessage = "시도 횟수가 허용되지 않은 형태로 입력되었습니다. 반드시 자연수로 입력되어야 합니다.";
+        assertThatThrownBy(() -> RacingCarValidator.validateTryCount(charTryCount))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(charExceptionMessage);
+    }
+    @Test
+    void 시도횟수_음수_입력_테스트() {
+        String charTryCount = "a";
+        String charExceptionMessage = "시도 횟수가 허용되지 않은 형태로 입력되었습니다. 반드시 자연수로 입력되어야 합니다.";
+        assertThatThrownBy(() -> RacingCarValidator.validateTryCount(charTryCount))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(charExceptionMessage);
+    }
+    @Test
+    void 시도횟수_소수_입력테스트() {
+        String pointTryCount = "2.5";
+        String pointExceptionMessage = "시도 횟수가 허용되지 않은 형태로 입력되었습니다. 반드시 자연수로 입력되어야 합니다.";
+        assertThatThrownBy(() -> RacingCarValidator.validateTryCount(pointTryCount))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(pointExceptionMessage);
+    }
+    @Test
+    void 시도횟수_0_입력테스트() {
+        String zeroTryCount = "0";
+        String zeroExceptionMessage = "시도 횟수는 반드시 0보다 큰 자연수로 입력되어야 합니다.";
+        assertThatThrownBy(() -> RacingCarValidator.validateTryCount(zeroTryCount))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(zeroExceptionMessage);
+    }
+    @Test
+    void 시도횟수_비어있음_테스트(){
+        String emptyTryCount = "";
+        String emptyExceptionMessage = "시도 횟수 입력이 비어있습니다.";
+        assertThatThrownBy(() -> RacingCarValidator.validateTryCount(emptyTryCount))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(emptyExceptionMessage);
+    }
+    @Test
+    void 시도횟수_자연수_입력테스트() {
+        String normalTryCount = "2";
+        assertThatCode(() -> RacingCarValidator.validateTryCount(normalTryCount)).doesNotThrowAnyException();
+    }
+
 
 }
