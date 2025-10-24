@@ -21,14 +21,6 @@ public class RacingCarValidatorTest {
                 .hasMessageContaining(lengthNames[1] + lengthExpectedMessage);
     }
     @Test
-    void 이름_빈_문자열_테스트(){
-        String[] emptyNames = {"pobi", " "};
-        String blankExpectedMessage = "일부 이름이 빈칸으로 주어져 있습니다.";
-        assertThatThrownBy(() -> RacingCarValidator.validateCarName(emptyNames))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(blankExpectedMessage);
-    }
-    @Test
     void 이름_중복_테스트(){
         String[] duplicateNames = {"pobi", "pobi"};
         String duplicateExpectedMessage = " 해당 이름이 이전에 나온 적 있습니다.";
@@ -43,6 +35,14 @@ public class RacingCarValidatorTest {
         assertThatThrownBy(() -> RacingCarValidator.validateCarName(notAllowedNames))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(notAllowedNames[0] + nowAllowedExpectedMessage);
+    }
+    @Test
+    void 아무입력_없는_이름_테스트() {
+        String[] blankNames = {""};
+        String blankExpectedMessage = "일부 이름이 빈칸으로 주어져 있습니다.";
+        assertThatThrownBy(() -> RacingCarValidator.validateCarName(blankNames))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(blankExpectedMessage);
     }
     @Test
     void 정상적인_자동차_입력_테스트(){
@@ -63,6 +63,11 @@ public class RacingCarValidatorTest {
     void 정상적인_자동차_입력_한글_테스트(){
         String[] normalKorNames = {"포비", "nuri", "로켓보이"};
         assertThatCode(() -> RacingCarValidator.validateCarName(normalKorNames)).doesNotThrowAnyException();
+    }
+    @Test
+    void 정상적인_자동차_입력_앞뒤공백_테스트(){
+        String[] normalBlankNames = {"포비", "누리", "로켓보이"};
+        assertThatCode(() -> RacingCarValidator.validateCarName(normalBlankNames)).doesNotThrowAnyException();
     }
     // 시도 횟수 입력 테스트
     @Test

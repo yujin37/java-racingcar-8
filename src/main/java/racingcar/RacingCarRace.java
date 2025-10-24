@@ -11,7 +11,7 @@ public class RacingCarRace {
         List<Car> carMoves = new ArrayList<>();
         RacingCarOutputView.runMessage();
         for(String name : carName) {
-            carMoves.add(new Car(name));
+            carMoves.add(new Car(name.trim()));
         }
         Dice dice = new Dice();
         for(int i=0;i<intTryCount;i++){
