@@ -12,7 +12,7 @@ public class RacingCarValidator {
     public static void validateCarName(String[] names){
         HashSet<String> uniqueName = new HashSet<String>();
         for (String name : names){
-            if(name.isEmpty()) {
+            if(name.isEmpty() || name.trim().isEmpty()) {
                 throw new IllegalArgumentException(ErrorCode.VALIDATE_NAME_BLANK.getMessage());
             }
             if(name.length()>STRICT_LENGTH){
