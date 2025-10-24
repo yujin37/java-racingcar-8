@@ -9,4 +9,9 @@ public class RacingCarInputView {
         return Console.readLine();
     }
 
+    public static String inputTryCount(){
+        System.out.println("시도할 횟수는 몇 회인가요?");
+        return Console.readLine();
+    }
+
 }

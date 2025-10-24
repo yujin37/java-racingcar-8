@@ -8,6 +8,8 @@ public class RacingCarController {
         String carName = RacingCarInputView.inputCarName();
         String[] splitName = RacingCarNameParser.parseCarName(carName);
         RacingCarValidator.validateCarName(splitName);
+        String tryCount = RacingCarInputView.inputTryCount();
+        RacingCarValidator.validateTryCount(tryCount);
     }
 
 }

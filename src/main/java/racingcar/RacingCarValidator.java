@@ -8,6 +8,9 @@ public class RacingCarValidator {
     private static final String VALIDATE_NAME_LENGTH_ERROR_MESSAGE = " 해당 이름 길이가 5글자보다 깁니다.";
     private static final String VALIDATE_DUPLICATION_ERROR_MESSAGE = " 해당 이름이 이전에 나온 적 있습니다.";
     private static final String VALIDATE_NOT_ALLOWED_CHAR_ERROR_MESSAGE = " 해당 이름이 이름 규칙에 맞지 않습니다. 이름에는 숫자, 영문자, 한글, _만 나올 수 있습니다.";
+    private static final String VALIDATE_TRY_EMPTY_ERROR_MESSAGE = "시도 횟수 입력이 비어있습니다.";
+    private static final String VALIDATE_TRY_NOT_INTEGER_ERROR_MESSAGE = "시도 횟수가 허용되지 않은 형태로 입력되었습니다. 반드시 자연수로 입력되어야 합니다.";
+    private static final String VALIDATE_TRY_NOT_ZERO_AND_NEGATIVE_ERROR_MESSAGE = "시도 횟수는 반드시 0보다 큰 자연수로 입력되어야 합니다.";
     private static final Integer STRICT_LENGTH = 5;
     private static final Pattern pattern = Pattern.compile("^[0-9a-zA-Z가-힣_]*$");
 
@@ -29,6 +32,25 @@ public class RacingCarValidator {
             uniqueName.add(name);
         }
 
+    }
+    public static void validateTryCount(String count) {
+        if(count.isEmpty() || count.trim().isEmpty()) {
+            throw new IllegalArgumentException(VALIDATE_TRY_EMPTY_ERROR_MESSAGE);
+        }
+
+        Integer intCount;
+
+        try {
+            intCount = Integer.parseInt(count);
+        } catch (Exception e) {
+            throw new IllegalArgumentException(VALIDATE_TRY_NOT_INTEGER_ERROR_MESSAGE);
+        }
+
+        if(intCount <= 0) {
+            throw new IllegalArgumentException(VALIDATE_TRY_NOT_ZERO_AND_NEGATIVE_ERROR_MESSAGE);
+        }
+
+        //System.out.println(intCount);
     }
 
 }
