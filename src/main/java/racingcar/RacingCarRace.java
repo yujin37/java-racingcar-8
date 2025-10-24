@@ -1,6 +1,7 @@
 package racingcar;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class RacingCarRace {
@@ -20,6 +21,16 @@ public class RacingCarRace {
                 }
             }
             RacingCarOutputView.perMemberResult(carMoves);
+        }
+        int maxMove = 0;
+        List<String> maxName = new ArrayList<>();
+        for(Car car : carMoves) {
+            if(maxMove < car.moveStatus) {
+                maxMove = car.moveStatus;
+                maxName = new ArrayList<>();
+                maxName.add(car.getCarName());
+            } else if(maxMove == car.moveStatus)
+                maxName.add(car.getCarName());
         }
 
 
