@@ -32,7 +32,7 @@ public class RacingCarRace {
             } else if(maxMove == car.moveStatus)
                 maxName.add(car.getCarName());
         }
-
+        RacingCarOutputView.finalWinner(maxName);
 
 
     }
