@@ -106,6 +106,14 @@ public class RacingCarValidatorTest {
                 .hasMessageContaining(emptyExceptionMessage);
     }
     @Test
+    void 시도횟수_10만초과_테스트(){
+        String bigTryCount = "100001";
+        String bigExceptionMessage = "시도 횟수 범위가 초과되었습니다. 시도 횟수는 최대 10만 이내로만 제한합니다.";
+        assertThatThrownBy(() -> RacingCarValidator.validateTryCount(bigTryCount))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(bigExceptionMessage);
+    }
+    @Test
     void 시도횟수_자연수_입력테스트() {
         String normalTryCount = "2";
         assertThatCode(() -> RacingCarValidator.validateTryCount(normalTryCount)).doesNotThrowAnyException();
