@@ -10,6 +10,8 @@ public class RacingCarController {
         RacingCarValidator.validateCarName(splitName);
         String tryCount = RacingCarInputView.inputTryCount();
         RacingCarValidator.validateTryCount(tryCount);
+        RacingCarRace race = new RacingCarRace();
+        race.game(splitName, tryCount);
     }
 
 }

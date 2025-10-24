@@ -16,4 +16,11 @@ public class Car {
         return moveStatus;
     }
 
+    public String getDashMove() {
+        return (String) ("-".repeat(getMoveStatus()));
+    }
+    public String getCarName() {
+        return carName;
+    }
+
 }
