@@ -66,7 +66,7 @@ public class RacingCarValidatorTest {
     }
     @Test
     void 정상적인_자동차_입력_앞뒤공백_테스트(){
-        String[] normalBlankNames = {"포비", "누리", "로켓보이"};
+        String[] normalBlankNames = {"포비", " 누리", " 로켓보이 "};
         assertThatCode(() -> RacingCarValidator.validateCarName(normalBlankNames)).doesNotThrowAnyException();
     }
     // 시도 횟수 입력 테스트
