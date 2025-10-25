@@ -5,6 +5,7 @@ import racingcar.model.Car;
 
 public class RacingCarOutputView {
     public static void runMessage() {
+        System.out.println();
         System.out.println("실행 결과");
     }
 
