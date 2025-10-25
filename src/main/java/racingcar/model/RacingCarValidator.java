@@ -1,4 +1,4 @@
-package racingcar;
+package racingcar.model;
 
 import java.math.BigInteger;
 import java.util.HashSet;

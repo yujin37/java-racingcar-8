@@ -1,6 +1,9 @@
-package racingcar;
+package racingcar.controller;
 
-import java.util.Arrays;
+import racingcar.model.RacingCarRace;
+import racingcar.model.RacingCarNameParser;
+import racingcar.model.RacingCarValidator;
+import racingcar.view.RacingCarInputView;
 
 public class RacingCarController {
 

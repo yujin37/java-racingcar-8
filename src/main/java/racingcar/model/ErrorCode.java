@@ -1,4 +1,4 @@
-package racingcar;
+package racingcar.model;
 
 public enum ErrorCode {
     VALIDATE_NAME_BLANK("일부 이름이 빈칸으로 주어져 있습니다."),

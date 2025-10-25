@@ -1,6 +1,7 @@
-package racingcar;
+package racingcar.view;
 
 import java.util.List;
+import racingcar.model.Car;
 
 public class RacingCarOutputView {
     public static void runMessage() {
