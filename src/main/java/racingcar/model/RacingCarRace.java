@@ -1,7 +1,9 @@
 package racingcar.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import racingcar.view.RacingCarOutputView;
 
 public class RacingCarRace {
@@ -18,10 +20,10 @@ public class RacingCarRace {
     }
 
     public List<String> moveMaxCars(int maxMove, List<String> maxName, Car car) {
-        if (maxMove < car.moveStatus) {
+        if (maxMove < car.getMoveStatus()) {
             maxName = new ArrayList<>();
             maxName.add(car.getCarName());
-        } else if (maxMove == car.moveStatus) {
+        } else if (maxMove == car.getMoveStatus()) {
             maxName.add(car.getCarName());
         }
         return maxName;
@@ -29,12 +31,10 @@ public class RacingCarRace {
 
     public void game(String[] carName, String tryCount) {
         int intTryCount = Integer.parseInt(tryCount);
-
-        List<Car> carMoves = new ArrayList<>();
         RacingCarOutputView.runMessage();
-        for (String name : carName) {
-            carMoves.add(new Car(name.trim()));
-        }
+        List<Car> carMoves = Arrays.stream(carName)
+                .map(name -> new Car(name.trim()))
+                .collect(Collectors.toList());
         Dice dice = new Dice();
         for (int i = 0; i < intTryCount; i++) {
             moveCars(carMoves, dice);
