@@ -33,7 +33,5 @@ public class RacingCarRace {
                 maxName.add(car.getCarName());
         }
         RacingCarOutputView.finalWinner(maxName);
-
-
     }
 }

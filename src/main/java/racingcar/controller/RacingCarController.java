@@ -7,7 +7,7 @@ import racingcar.view.RacingCarInputView;
 
 public class RacingCarController {
 
-    public void start(){
+    public void start() {
         String carName = RacingCarInputView.inputCarName();
         String[] splitName = RacingCarNameParser.parseCarName(carName);
         RacingCarValidator.validateCarName(splitName);
