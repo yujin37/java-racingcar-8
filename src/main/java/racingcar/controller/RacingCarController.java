@@ -1,9 +1,11 @@
 package racingcar.controller;
 
-import racingcar.model.RacingCarRace;
+import java.util.List;
 import racingcar.model.RacingCarNameParser;
+import racingcar.model.RacingCarRace;
 import racingcar.model.RacingCarValidator;
 import racingcar.view.RacingCarInputView;
+import racingcar.view.RacingCarOutputView;
 
 public class RacingCarController {
 
@@ -13,8 +15,10 @@ public class RacingCarController {
         RacingCarValidator.validateCarName(splitName);
         String tryCount = RacingCarInputView.inputTryCount();
         RacingCarValidator.validateTryCount(tryCount);
+        RacingCarOutputView.runMessage();
         RacingCarRace race = new RacingCarRace();
-        race.game(splitName, tryCount);
+        List<String> maxName = race.game(splitName, tryCount);
+        RacingCarOutputView.finalWinner(maxName);
     }
 
 }
