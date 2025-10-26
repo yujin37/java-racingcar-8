@@ -16,7 +16,7 @@ public class RacingCarValidator {
             nameIntegrationTest(name, uniqueName);
             uniqueName.add(name);
         }
-
+        validateCarsCount(uniqueName);
     }
 
     private static void nameIntegrationTest(String name, HashSet<String> uniqueName) {
@@ -47,6 +47,15 @@ public class RacingCarValidator {
     private static void validateNameRules(String name) {
         if (!pattern.matcher(name).matches()) {
             throw new IllegalArgumentException(name + ErrorCode.VALIDATE_NOT_ALLOWED_CHAR.getMessage());
+        }
+    }
+
+    private static void validateCarsCount(HashSet<String> uniqueCars) {
+        if (uniqueCars.size() < 2) {
+            throw new IllegalArgumentException((ErrorCode.VALIDATE_CARS_MIN_COUNT.getMessage()));
+        }
+        if (uniqueCars.size() >= 10) {
+            throw new IllegalArgumentException((ErrorCode.VALIDATE_CARS_MAX_COUNT.getMessage()));
         }
     }
 
@@ -87,5 +96,4 @@ public class RacingCarValidator {
             throw new IllegalArgumentException(ErrorCode.VALIDATE_TRY_ALLOWED_ARRANGE.getMessage());
         }
     }
-
 }
