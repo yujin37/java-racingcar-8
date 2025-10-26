@@ -1,6 +1,5 @@
 package racingcar.model;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,12 +25,15 @@ public class RacingCarRace {
     }
 
     private List<String> calculateWinner(List<Car> carMoves) {
-        int maxMove = 0;
-        List<String> maxName = new ArrayList<>();
-        for (Car car : carMoves) {
-            maxName = moveMaxCars(maxMove, maxName, car);
-        }
-        return maxName;
+        int maxMove = carMoves.stream()
+                .mapToInt(Car::getMoveStatus)
+                .max()
+                .orElse(0);
+        return carMoves.stream()
+                .filter(car -> car.getMoveStatus() == maxMove)
+                .map(Car::getCarName)
+                .collect(Collectors.toList());
+
     }
 
     private void moveCars(List<Car> cars, Dice dice) {
@@ -46,13 +48,4 @@ public class RacingCarRace {
         }
     }
 
-    private List<String> moveMaxCars(int maxMove, List<String> maxName, Car car) {
-        if (maxMove < car.getMoveStatus()) {
-            maxName = new ArrayList<>();
-            maxName.add(car.getCarName());
-        } else if (maxMove == car.getMoveStatus()) {
-            maxName.add(car.getCarName());
-        }
-        return maxName;
-    }
 }
