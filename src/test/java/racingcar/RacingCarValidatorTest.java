@@ -52,6 +52,22 @@ public class RacingCarValidatorTest {
     }
 
     @Test
+    void 유효한_자동차_개수가_1이하인_경우() {
+        String[] validMinNames = {"nuri"};
+        assertThatThrownBy(() -> RacingCarValidator.validateCarName(validMinNames))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(TestErrorCode.TEST_VALIDATE_CARS_MIN_COUNT.getMessage());
+    }
+
+    @Test
+    void 유효한_자동차_개수가_10초과인_경우() {
+        String[] validMaxNames = {"누리", "윈지", "로켓보이", "단디", "쎄리", "동글이", "턱돌이", "블레오", "럭키", "스타", "철웅이"};
+        assertThatThrownBy(() -> RacingCarValidator.validateCarName(validMaxNames))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(TestErrorCode.TEST_VALIDATE_CARS_MAX_COUNT.getMessage());
+    }
+
+    @Test
     void 정상적인_자동차_입력_테스트() {
         String[] normalNames = {"pobi", "nuri", "roki"};
         assertThatCode(() -> RacingCarValidator.validateCarName(normalNames)).doesNotThrowAnyException();
