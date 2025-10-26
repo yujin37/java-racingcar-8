@@ -1,58 +1,102 @@
 # java-racingcar-precourse
-## 주요 기능
-* 사용자 정보 입력
-  * 경주할 자동차 이름 입력을 받는다.
-    * 쉼표 기준으로 구분한다
-    * 이름은 5자 이하이다.
-    * 잘못된 입력 시 IllegalArgumentException를 발생시킨다.
-  * 시도할 횟수를 입력 받는다.
-    * 1이상 정수로 이루어져야 한다. 
-    * 잘못된 입력(음수, 소수, 0 등)시  IllegalArgumentException를 발생시킨다. 
-* 경주 진행
-  * 주어진 횟수만큼 반복한다.
-  * 무작위 값(0-9)을 던진다.
-  * 무작위 값이 4이상일 때 전진한다.
-  * 각 차수별 결과를 출력한다.
-* 최종 우승자 출력
-  * 가장 많이 전진한 자동차를 찾고 저장한다.
-  * 우승자 여러 명이면 쉼표를 이용해서 구분한다. 
-* 예외 처리 
-  * 사용자가 잘못된 값 입력 시 IllegalArgumentException를 발생시킨다.
-## 구현 순서
-- 경주할 자동차 이름을 입력 받는다.(쉼표 기준으로 구분한다)
-- 자동차 이름 규칙에 맞게 되었는지 검증한다. 
-- 시도할 횟수 입력 및 검증한다.
-- 각 차수별 각 자동차마다 무작위 값을 구한다.
-- 무작위 구한 값을 자동차 별로 저장한다.
-- 현재 자동차 이동 상태를 출력한다.
-- 가장 길이가 길거나 큰 값을 구해서 해당 이름을 가져와서 저장한다.
-- 저장된 최종 우승자 결과를 출력한다. 
-## 프로그래밍 요구 사항 1
-* JDK 21 버전에서 실행 가능해야 한다.
-* 프로그램 실행의 시작점은 Application의 main()이다.
-* build.gradle 파일은 변경할 수 없으며, 제공된 라이브러리 이외의 외부 라이브러리는 사용하지 않는다.
-* 프로그램 종료 시 System.exit()를 호출하지 않는다.
-* 프로그래밍 요구 사항에서 달리 명시하지 않는 한 파일, 패키지 등의 이름을 바꾸거나 이동하지 않는다.
-* 자바 코드 컨벤션을 지키면서 프로그래밍한다.
-* 기본적으로 Java Style Guide를 원칙으로 한다.
-## 프로그래밍 요구사항 2
-* indent(인덴트, 들여쓰기) depth를 3이 넘지 않도록 구현한다. 2까지만 허용한다.
-  * 예를 들어 while문 안에 if문이 있으면 들여쓰기는 2이다.
-  * 힌트: indent(인덴트, 들여쓰기) depth를 줄이는 좋은 방법은 함수(또는 메서드)를 분리하면 된다.
-* 3항 연산자를 쓰지 않는다.
-* 함수(또는 메서드)가 한 가지 일만 하도록 최대한 작게 만들어라.
-* JUnit 5와 AssertJ를 이용하여 정리한 기능 목록이 정상적으로 작동하는지 테스트 코드로 확인한다.
-  * 테스트 도구 사용법이 익숙하지 않다면 아래 문서를 참고하여 학습한 후 테스트를 구현한다.
-    * JUnit 5 User Guide
-      * AssertJ User Guide
-      * AssertJ Exception Assertions
-      * Guide to JUnit 5 Parameterized Tests
-### 라이브러리
-* camp.nextstep.edu.missionutils에서 제공하는 Randoms 및 Console API를 사용하여 구현해야 한다.
-  * Random 값 추출은 camp.nextstep.edu.missionutils.Randoms의 pickNumberInRange()를 활용한다.
-* 사용자가 입력하는 값은 camp.nextstep.edu.missionutils.Console의 readLine()을 활용한다.
 
-**사용 예시**
+## 자동차 경주
 
-0에서 9까지의 정수 중 한 개의 정수 반환
-``` Randoms.pickNumberInRange(0, 9);```
+> 초간단 자동차 경주 게임을 구현한다.
+> - 주어진 횟수 동안 n대의 자동차는 전진 또는 멈출 수 있다.
+> - 각 자동차에 이름을 부여할 수 있다. 전진하는 자동차를 출력할 때 자동차 이름을 같이 출력한다.
+> - 자동차 이름은 쉼표(,)를 기준으로 구분하며 이름은 5자 이하만 가능하다.
+> - 사용자는 몇 번의 이동을 할 것인지를 입력할 수 있어야 한다.
+> - 전진하는 조건은 0에서 9 사이에서 무작위 값을 구한 후 무작위 값이 4 이상일 경우이다.
+> - 자동차 경주 게임을 완료한 후 누가 우승했는지를 알려준다. 우승자는 한 명 이상일 수 있다.
+> - 우승자가 여러 명일 경우 쉼표(,)를 이용하여 구분한다.
+> - 사용자가 잘못된 값을 입력할 경우 IllegalArgumentException을 발생시킨 후 애플리케이션은 종료되어야 한다.
+
+## 목차
+
+[1. 디렉토리 구조](#디렉토리-구조) \
+[2. 기능 목록](#기능-목록) \
+[3. 진행 구조](#진행-구조)
+
+## 디렉토리 구조
+
+```commandline
+├───main
+│   └───java
+│       └───racingcar
+│           │   Application.java #프로그램 시작
+│           │
+│           ├───controller
+│           │       RacingCarController.java #게임 전체 제어
+│           │
+│           ├───model
+│           │       Car.java # 차 객체
+│           │       Dice.java # 주사위 객체
+│           │       ErrorCode.java # 예외 메시지 정의
+│           │       RacingCarNameParser.java # 이름 파싱 처리
+│           │       RacingCarRace.java # 경기 진행 로직
+│           │       RacingCarValidator.java # 이름 및 시도횟수 검증 로직
+│           │
+│           └───view
+│                   RacingCarInputView.java # 입력 처리
+│                   RacingCarOutputView.java # 출력 처리
+│
+└───test
+    └───java
+        └───racingcar
+                ApplicationTest.java # 기본 테스트
+                CarTest.java # 차 객체 생성 테스트
+                DiceTest.java # 주사위 객체 생성 테스트
+                RacingCarNameParserTest.java # 이름 파싱 테스트
+                RacingCarValidatorTest.java # 이름, 횟수 검증 테스트
+                TestErrorCode.java # 테스트 예외 메시지 정의
+
+
+```
+
+## 기능 목록
+
+### 자동차 이름 입력
+
+- [x] 경주할 자동차 이름 입력
+- [x] 쉼표(,) 기준으로 구분
+- [x] 잘못된 입력 시 IllegalArgumentException를 발생
+    - [x] 이름이 비어있는 경우
+    - [x] 이름 길이가 5글자 초과하는 경우
+    - [x] 중복된 이름이 있는 경우
+    - [x] 이름 형식이 잘못된 경우 (`A-Z`, `a-z`, `가-힣`, `0-9`, `_` 허용)
+    - [x] 이름 총 개수가 초과하는 경우(최소 2개 최대 10개 허용)
+
+### 시도할 횟수 입력
+
+- [x] 시도할 횟수를 입력
+- [x] 잘못된 입력 시 IllegalArgumentException를 발생
+    - [x] 시도 횟수가 비어있는 경우
+    - [x] 시도 횟수가 허용되지 않은 형태인 경우(소수(`2.5`), 문자)
+    - [x] 시도 횟수 0 혹은 음수인 경우
+    - [x] 시도 횟수 최대 숫자(10만)를 넘어가는 경우
+
+### 경주 진행
+
+- [x] 주어진 횟수만큼 반복
+    - [x] 무작위 값(0-9)을 던짐
+        - [x] 무작위 값이 4이상일 때 전진
+    - [x] 각 차수별 결과를 출력
+- [x] 가장 많이 전진한 자동차를 찾고 저장
+- [x] 우승자 여러 명이면 쉼표를 이용해서 구분
+- [x] 최종 우승자 출력
+
+## 진행 구조
+
+- 자동차 이름 입력(`InputView.inputCarName`)
+- 자동차 이름 검증(`Validator.validateCarName`)
+- 자동차 이름 파싱(`NameParser.parseCarName`)
+- 시도할 횟수 입력(`InputView.inputTryCount`)
+- 시도할 횟수 검증(`Validator.validateTryCount`)
+- 레이스 진행(`Race.game`)
+    - 자동차 객체 생성(`Car`, `Race.game`)
+    - 주사위 객체 생성 및 결과 반환(`Dice`, `Race.playRounds`)
+    - 자동차 이동 경로 기록(`Race.moveCars`, `moveCarIfPossible`)
+    - 각 회차 결과 출력(`OutputView.perMemberResult`)
+- 최종 이동 결과 파악 및 저장(`Race.calculateWinner`)
+- 최종 우승자 출력(`OutputView.finalWinner`)
