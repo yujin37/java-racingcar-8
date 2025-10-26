@@ -54,7 +54,7 @@ public class RacingCarValidator {
         if (uniqueCars.size() < 2) {
             throw new IllegalArgumentException((ErrorCode.VALIDATE_CARS_MIN_COUNT.getMessage()));
         }
-        if (uniqueCars.size() >= 10) {
+        if (uniqueCars.size() > 10) {
             throw new IllegalArgumentException((ErrorCode.VALIDATE_CARS_MAX_COUNT.getMessage()));
         }
     }
