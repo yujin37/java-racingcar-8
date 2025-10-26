@@ -1,7 +1,9 @@
 package racingcar.model;
 
 public class RacingCarNameParser {
-    public static String[] parseCarName(String carName){
-        return carName.split(",");
+    private static final String SPLIT_CHAR = ",";
+
+    public static String[] parseCarName(String carName) {
+        return carName.split(SPLIT_CHAR);
     }
 }
